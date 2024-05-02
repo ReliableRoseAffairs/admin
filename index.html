@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <input type="text" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <script>
+        var inactivityTime = 120000; // 2 minutes in milliseconds
+        var logoutTimer;
+
+        function resetTimer() {
+            clearTimeout(logoutTimer);
+            logoutTimer = setTimeout(logout, inactivityTime);
+        }
+
+        function logout() {
+            // Redirect to logout page or perform logout actions
+            window.location.href = "logout.html";
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // Check if email and password match
+            if (email === "amos@alfa.com" && password === "Atureta56") {
+                // Reset timer on successful login
+                resetTimer();
+                // Redirect to admin dashboard or another page
+                window.location.href = "admin-dashboard.html";
+            } else {
+                alert("Invalid email or password. Please try again.");
+            }
+        });
+
+        // Reset timer when there is any activity on the page
+        window.addEventListener("mousemove", resetTimer);
+        window.addEventListener("keypress", resetTimer);
+
+        // Initial start of timer
+        resetTimer();
+    </script>
+</body>
+</html>
